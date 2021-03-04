@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Form, Input, Button,Checkbox, Anchor } from 'antd';
 import 'antd/dist/antd.css';
 
+function LoginForm({login, error}){
 
-const layout = {
+  const [details, setDetails] = useState({username:"",password:""})
+  const layout = {
     labelCol: {
       span: 18,
     },
@@ -25,9 +27,15 @@ const layout = {
     const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo);
     };
-  
-class Login extends Component{
-    render(){
+      
+
+    const submitHandler = e =>{
+      
+      e.preventDefault();
+      login(details);
+      alert(details)
+    }
+
         return(
            <div>
            <div style={{textAlignLast:'right', margin:'5% 8%', fontWeight:'700', fontSize:'40px'}}>Application Login</div>
@@ -39,6 +47,7 @@ class Login extends Component{
            }}
            onFinish={onFinish}
            onFinishFailed={onFinishFailed}
+           onSubmitCapture={submitHandler}
          >
            <Form.Item
              label="Username"
@@ -50,7 +59,7 @@ class Login extends Component{
                },
              ]}
            >
-             <Input />
+             <Input onChange={e=> setDetails({...details, username:e.target.value})} value={details.username}/>
            </Form.Item>
      
            <Form.Item
@@ -63,7 +72,7 @@ class Login extends Component{
                },
              ]}
            >
-             <Input.Password />
+             <Input.Password onChange={e=> setDetails({...details, password:e.target.value})} value={details.password}/>
            </Form.Item>
      
            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
@@ -80,7 +89,7 @@ class Login extends Component{
          </Form>
            </div>
         )
-    }
 }
 
-export default Login;
+
+export default LoginForm;
