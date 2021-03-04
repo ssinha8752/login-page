@@ -33,7 +33,6 @@ function LoginForm({login, error}){
       
       e.preventDefault();
       login(details);
-      alert(details)
     }
 
         return(

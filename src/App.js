@@ -24,7 +24,8 @@ function App() {
     }
     else
     {
-      console.log('Dont Match')
+      alert('Incorrect ID and Password');
+      window.location.reload();
     }
   }
 
